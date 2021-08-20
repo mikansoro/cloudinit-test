@@ -11,7 +11,6 @@ net.ipv4.ip_forward                 = 1
 net.bridge.bridge-nf-call-ip6tables = 1
 EOF
 sysctl --system
-apt install -y apt-transport-https ca-certificates curl gnupg lsb-release
 curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
 echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
@@ -20,5 +19,5 @@ apt update
 apt install -y kubectl kubelet kubeadm containerd.io
 apt-mark hold kubectl kubelet kubeadm containerd.io
 mkdir -p /etc/containerd
-containerd config default | tee /etc/containerd/config.toml
+containerd config default &>/dev/null | tee /etc/containerd/config.toml
 systemctl restart containerd
