@@ -19,5 +19,5 @@ apt update
 apt install -y kubectl kubelet kubeadm containerd.io
 apt-mark hold kubectl kubelet kubeadm containerd.io
 mkdir -p /etc/containerd
-containerd config default &>/dev/null | tee /etc/containerd/config.toml
+containerd config default | tee /etc/containerd/config.toml
 systemctl restart containerd
