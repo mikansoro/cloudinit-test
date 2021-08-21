@@ -19,6 +19,6 @@ apt update
 apt install -y kubectl kubelet kubeadm containerd.io
 apt-mark hold kubectl kubelet kubeadm containerd.io
 mkdir -p /etc/containerd
-containerd config default | tee /etc/containerd/config.toml
-sed '/[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]/a           SystemdCgroup = true'
+wget https://raw.githubusercontent.com/timidtogekiss/cloudinit-test/master/containerd.toml
+mv containerd.toml /etc/containerd/config.toml
 systemctl restart containerd
